@@ -5,8 +5,11 @@ news_host = os.environ.get('NEWS_HOST')
 
 def kick_moex():
     logging.info("Kicking moex.....")
-    current_date = str(datetime.now().date().isoformat())
-    requests.get(moex_host + "/" + current_date)
+    weekday = datetime.today().weekday()
+    if weekday == 6:
+        today = datetime.date.today()
+        yesterday = today - datetime.timedelta(days=1)
+        requests.get(moex_host + "/" + str(yesterday))
 
 def kick_news():
     logging.info("Kicking news.......")
