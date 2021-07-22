@@ -1,13 +1,15 @@
-import os, requests, schedule, time, queue, threading
+import os, requests, schedule, time, queue, threading, logging
 from datetime import datetime
 moex_host = os.environ.get('MOEX_HOST')
 news_host = os.environ.get('NEWS_HOST')
 
 def kick_moex():
+    logging.info("Kicking moex.....")
     current_date = str(datetime.now().date().isoformat())
     requests.get(moex_host + "/" + current_date)
 
 def kick_news():
+    logging.info("Kicking news.......")
     requests.get(news_host + "/")
 
 
