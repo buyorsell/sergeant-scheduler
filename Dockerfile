@@ -15,4 +15,6 @@ ENV NEWS_HOST="http://10.0.0.80"
 
 ENV STOCK_HOST="http://localhost:8080/db/stock"
 
+ENV STOCK_DIR="/stock/"
+
 CMD ["python3", "main.py"]
