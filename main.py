@@ -29,7 +29,7 @@ def worker_main():
 
 jobqueue = queue.Queue()
 
-schedule.every().day.at("00:00").do(jobqueue.put, kick_moex)
+schedule.every().day.at("21:00").do(jobqueue.put, kick_moex)
 schedule.every().hour.do(jobqueue.put, kick_news)
 
 worker_thread = threading.Thread(target=worker_main)
