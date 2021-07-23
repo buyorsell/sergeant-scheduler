@@ -9,7 +9,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 def kick_moex():
     logging.info("Kicking moex.....")
     weekday = datetime.today().weekday()
-    if weekday == 6:
+    if weekday == 5:
         today = datetime.date.today()
         yesterday = today - datetime.timedelta(days=1)
         requests.get(moex_host + "/" + str(today))
