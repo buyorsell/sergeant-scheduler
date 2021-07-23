@@ -9,7 +9,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 def kick_moex():
     logging.info("Kicking moex.....")
     weekday = datetime.today().weekday()
-    if weekday == 5:
+    if weekday == 4:
         today = datetime.date.today()
         yesterday = today - datetime.timedelta(days=1)
         requests.get(moex_host + "/" + str(today))
@@ -29,7 +29,7 @@ def worker_main():
 
 jobqueue = queue.Queue()
 
-schedule.every().day.at("21:00").do(jobqueue.put, kick_moex)
+schedule.every().day.at("21:10").do(jobqueue.put, kick_moex)
 schedule.every().hour.do(jobqueue.put, kick_news)
 
 worker_thread = threading.Thread(target=worker_main)
