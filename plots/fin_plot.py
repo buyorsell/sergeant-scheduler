@@ -54,7 +54,7 @@ def save_sec_plot(secid):
     fig.update_layout(showlegend=False)
 
     fig.update_traces(hoverinfo="x,text")
-    stock_dir = os.environ.get('STOCK_HOST')
+    stock_dir = os.environ.get('STOCK_DIR')
     fig.write_html(stock_dir+secid+".html", config=dict(displayModeBar=False), full_html=False)
 
 
