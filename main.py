@@ -1,5 +1,6 @@
 import os, requests, schedule, time, queue, threading, logging
 from datetime import datetime
+from plots.fin_plot import upd_secs_plots
 moex_host = os.environ.get('MOEX_HOST')
 news_host = os.environ.get('NEWS_HOST')
 
@@ -10,6 +11,7 @@ def kick_moex():
         today = datetime.date.today()
         yesterday = today - datetime.timedelta(days=1)
         requests.get(moex_host + "/" + str(yesterday))
+        upd_secs_plots()
 
 def kick_news():
     logging.info("Kicking news.......")
