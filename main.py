@@ -12,7 +12,7 @@ def kick_moex():
     if weekday == 6:
         today = datetime.date.today()
         yesterday = today - datetime.timedelta(days=1)
-        requests.get(moex_host + "/" + str(yesterday))
+        requests.get(moex_host + "/" + str(today))
         upd_secs_plots()
 
 def kick_news():
