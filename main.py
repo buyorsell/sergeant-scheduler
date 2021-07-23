@@ -1,8 +1,10 @@
-import os, requests, schedule, time, queue, threading, logging
+import os, requests, schedule, time, queue, threading, logging, sys
 from datetime import datetime
 from plots.fin_plot import upd_secs_plots
 moex_host = os.environ.get('MOEX_HOST')
 news_host = os.environ.get('NEWS_HOST')
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 def kick_moex():
     logging.info("Kicking moex.....")
