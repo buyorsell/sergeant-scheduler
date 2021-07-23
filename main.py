@@ -10,8 +10,8 @@ def kick_moex():
     logging.info("Kicking moex.....")
     weekday = datetime.today().weekday()
     if weekday == 4:
-        today = datetime.date.today()
-        yesterday = today - datetime.timedelta(days=1)
+        today = datetime.now().date()
+        #yesterday = today - datetime.timedelta(days=1)
         requests.get(moex_host + "/" + str(today))
         upd_secs_plots()
 
@@ -29,7 +29,7 @@ def worker_main():
 
 jobqueue = queue.Queue()
 
-schedule.every().day.at("21:10").do(jobqueue.put, kick_moex)
+schedule.every().day.at("21:15").do(jobqueue.put, kick_moex)
 schedule.every().hour.do(jobqueue.put, kick_news)
 
 worker_thread = threading.Thread(target=worker_main)
