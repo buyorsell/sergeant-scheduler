@@ -11,7 +11,7 @@ COPY . .
 
 ENV MOEX_HOST="http://10.0.0.38"
 
-ENV NEWS_HOST="http://10.0.0.80"
+ENV NEWS_HOST="http://10.0.0.80:8080"
 
 ENV STOCK_HOST="http://localhost:8080/db/stock"
 
