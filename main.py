@@ -1,4 +1,4 @@
-import os, requests, schedule, time, queue, threading, logging, sys
+import os, requests, schedule, time, threading, logging, sys
 from datetime import datetime
 from plots.fin_plot import upd_secs_plots
 moex_host = os.environ.get('MOEX_HOST')
@@ -15,25 +15,19 @@ def kick_moex():
         requests.get(moex_host + "/" + str(today))
         upd_secs_plots()
 
+
 def kick_news():
     logging.info("Kicking news.......")
     requests.get(news_host + "/")
 
 
-def worker_main():
-    while True:
-        job_func = jobqueue.get()
-        job_func()
-        jobqueue.task_done()
+def run_threaded(job_func):
+    job_thread = threading.Thread(target=job_func)
+    job_thread.start()
 
 
-jobqueue = queue.Queue()
-
-schedule.every().day.at("21:15").do(jobqueue.put, kick_moex)
-schedule.every().hour.do(jobqueue.put, kick_news)
-
-worker_thread = threading.Thread(target=worker_main)
-worker_thread.start()
+schedule.every().day.at("21:00").do(run_threaded, kick_moex)
+schedule.every(30).minutes.do(run_threaded, kick_news)
 
 while True:
     schedule.run_pending()
