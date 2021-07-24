@@ -1,6 +1,6 @@
 import pandas as pd
 import datetime
-from ml_setup import session, AllNews, NewsFlow
+from ml.ml_setup import session, AllNews, NewsFlow
 from sqlalchemy import cast, Date
 import warnings, logging
 
