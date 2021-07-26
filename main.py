@@ -36,7 +36,7 @@ def kick_news():
 def kick_flow():
     logging.info("Kicking flow.......?")
     weekday = datetime.today().weekday()
-    if weekday == 6:
+    if weekday == 3:
         logging.info("Yep, it's time!")
         update_flow()
     return
