@@ -30,6 +30,8 @@ def kick_moex():
 def kick_news():
     logging.info("Kicking news.......")
     requests.get(news_host + "/")
+    logging.info("Kicking flow....")
+    update_flow()
     return
 
 
@@ -48,8 +50,8 @@ def run_threaded(job_func):
 
 
 schedule.every().day.at("21:00").do(run_threaded, kick_moex)
-schedule.every().day.at("21:00").do(run_threaded, kick_flow)
-schedule.every(30).minutes.do(run_threaded, kick_news)
+#schedule.every().day.at("21:00").do(run_threaded, kick_flow)
+schedule.every(10).minutes.do(run_threaded, kick_news)
 
 while True:
     schedule.run_pending()
