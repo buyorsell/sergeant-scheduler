@@ -132,7 +132,8 @@ class NewsFlow():
         resampler.bos_positive = resampler.bos > 0
         resampler.bos_negative = resampler.bos < 0
         resampler['ldas'] = resampler['ldas'].apply(lambda x: np.array(x))
-        grouped = resampler.resample("W")
+        resampler['datetime'] = resampler['datetime'].astype('datetime64[ns]')
+        grouped = resampler.resample("W", on = 'datetime')
         aggregate = list((k, v['bos_positive'].sum(), v['bos_negative'].sum(
         ), v["ldas"].sum(), v['id_list'].sum()) for k, v in grouped)
         new_df = pd.DataFrame(aggregate, columns=[
